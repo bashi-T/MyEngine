@@ -3,6 +3,7 @@
 #include"Managers/SRVManager.h"
 #include<map>
 #include<span>
+#include"SkyBox.h"
 
 #include<assimp/Importer.hpp>
 #include<assimp/scene.h>
@@ -55,6 +56,7 @@ public:
 		MaterialData material;
 		Node rootNode;
 		MaterialData eMaterial;
+		bool isEnvironment = true;
 	};
 	struct Joint
 	{
@@ -159,6 +161,8 @@ private:
 	ModelCommon* modelCommon_ = nullptr;
 	SRVManager* srvManager_ = nullptr;
 	HRESULT hr = NULL;
+
+	//SkyBox* skybox = nullptr;
 
 	VertexData* vertexData = nullptr;
 	ComPtr<ID3D12Resource> vertexResource = nullptr;

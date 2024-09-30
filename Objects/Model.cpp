@@ -21,6 +21,7 @@ void Model::ModelInitialize(ModelCommon* modelCommon, std::string objFilePath, s
 	modelData_.eMaterial.textureFilePath = "Resource/rostock_laage_airport_4k.dds";
 	TextureManager::GetInstance()->LoadTexture("Resource/rostock_laage_airport_4k.dds");
 	modelData_.eMaterial.textureIndex = TextureManager::GetInstance()->GetSrvIndex("Resource/rostock_laage_airport_4k.dds");
+	modelData_.isEnvironment = false;
 
 	materialData[0].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 	materialData[0].enableLighting = true;
@@ -120,8 +121,11 @@ void Model::Draw(ModelCommon* modelCommon, SRVManager* srvManager)
 	srvManager_->SetGraphicsRootDescriptorTable(
 		2, modelData_.material.textureIndex);
 
-	srvManager_->SetGraphicsRootDescriptorTable(
-		5, modelData_.eMaterial.textureIndex);
+	if(modelData_.isEnvironment==true)
+	{
+	}
+		srvManager_->SetGraphicsRootDescriptorTable(
+			5, modelData_.eMaterial.textureIndex);
 
 	modelCommon_->GetDx12Common()->GetCommandList().Get()->DrawIndexedInstanced(
 		UINT(modelData_.indices.size()), 1, 0, 0, 0);

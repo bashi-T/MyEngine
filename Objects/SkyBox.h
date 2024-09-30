@@ -73,6 +73,8 @@ public:
 
 	CameraTransform* cameraData = nullptr;
 
+	Material* GetMaterialData() { return materialData; }
+
 private:
 	SkyBoxCommon* skyBoxCommon_=nullptr;
 	HRESULT hr = NULL;

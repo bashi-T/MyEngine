@@ -22,11 +22,12 @@ void TitleScene::Init()
 		"human/sneakWalk.gltf",
 		"simpleSkin/simpleSkin.gltf",
 		"plane/plane.gltf",
+		"world/world.obj",
 	};
-	for (uint32_t i = 0; i < 1; i++)
+	for (uint32_t i = 0; i < 5; i++)
 	{
 		Object3d* object3d = new Object3d;
-		Particle* particle = new Particle;
+		//Particle* particle = new Particle;
 		//uint32_t j = i + 1;
 		if (i == 0)
 		{
@@ -59,13 +60,13 @@ void TitleScene::Init()
 			vertex.normal.z = vertex.position.z;
 		}
 		model->Memcpy();
-		object3d->SetTranslate({ 3.0f - (2.0f * i), float(pow(-1.0,i)), 1.0f });
+		//object3d->SetTranslate({ 3.0f - (2.0f * i), float(pow(-1.0,i)), 1.0f });
 		objects3d.push_back(object3d);
 		//object3d->SetRotate({ 0.0f, 3.3f, 0.0f });
-		particle->Initialize("Resource/particle.png", Object3dCommon::GetInstance());
-		particles.push_back(particle);
+		//particle->Initialize("Resource/particle.png", Object3dCommon::GetInstance());
+		//particles.push_back(particle);
 	}
-
+	objects3d[4]->SetScale({ 0.005f,0.005f,0.005f });
 	Object3dCommon::GetInstance()->SetDefaultCamera(Camera::GetInstance());
 }
 
@@ -114,15 +115,16 @@ void TitleScene::Update()
 		//	object3d->SetRotate({ 0.0f,4.5f,0.0f });
 		//}
 	}
-	objects3d[0]->AnimationUpdate(Camera::GetInstance());
+	//objects3d[0]->AnimationUpdate(Camera::GetInstance());
 	//objects3d[1]->SkeltonUpdate(Camera::GetInstance());
 	//objects3d[2]->SkeltonUpdate(Camera::GetInstance());
 	//objects3d[3]->Update(Camera::GetInstance());
+	objects3d[4]->Update(Camera::GetInstance());
 
-	for (Particle* particle : particles)
-	{
-		particle->Update();
-	}
+	//for (Particle* particle : particles)
+	//{
+	//	particle->Update();
+	//}
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE))
 	{
 		sceneNo = INGAME;
@@ -131,10 +133,11 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	objects3d[0]->Draw(ModelManager::GetInstance()->GetModelCommon());
+	//objects3d[0]->Draw(ModelManager::GetInstance()->GetModelCommon());
 	//objects3d[1]->SkeltonDraw(ModelManager::GetInstance()->GetModelCommon());
 	//objects3d[2]->SkeltonDraw(ModelManager::GetInstance()->GetModelCommon());
 	//objects3d[3]->Draw(ModelManager::GetInstance()->GetModelCommon());
+	objects3d[4]->Draw(ModelManager::GetInstance()->GetModelCommon());
 
 	//for (Particle* particle : particles)
 	//{
